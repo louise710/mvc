@@ -1,0 +1,320 @@
+[22-May-2025 06:33:44 Europe/Berlin] Parsed path: /dashboard
+[22-May-2025 06:33:44 Europe/Berlin] Dispatching: Method = GET, Path = /dashboard
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:33:44 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:33:44 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:33:44 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:33:55 Europe/Berlin] Parsed path: /addEmployee
+[22-May-2025 06:33:55 Europe/Berlin] Dispatching: Method = POST, Path = /addEmployee
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:33:55 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:33:55 Europe/Berlin] Received data: Array
+(
+    [first_name] => felmar
+    [last_name] => ogahayon
+    [office] => itcndc
+)
+
+[22-May-2025 06:33:55 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1 in D:\xampp\htdocs\mvc-main\classes\DBORM.php:207
+Stack trace:
+#0 D:\xampp\htdocs\mvc-main\classes\DBORM.php(207): PDOStatement->execute()
+#1 D:\xampp\htdocs\mvc-main\classes\DBORM.php(182): Classes\DBORM->_executeQuery()
+#2 D:\xampp\htdocs\mvc-main\models\EmployeeRepository.php(28): Classes\DBORM->insert(Array)
+#3 D:\xampp\htdocs\mvc-main\controllers\EmployeeController.php(37): Models\EmployeeRepository->create(Array)
+#4 D:\xampp\htdocs\mvc-main\routes\routes.php(59): Controllers\EmployeeController->addEmployee()
+#5 [internal function]: Routes\{closure}()
+#6 D:\xampp\htdocs\mvc-main\routes\Router.php(59): call_user_func_array(Object(Closure), Array)
+#7 D:\xampp\htdocs\mvc-main\index.php(45): Routes\Router->dispatch()
+#8 {main}
+  thrown in D:\xampp\htdocs\mvc-main\classes\DBORM.php on line 207
+[22-May-2025 06:35:20 Europe/Berlin] Parsed path: /dashboard
+[22-May-2025 06:35:20 Europe/Berlin] Dispatching: Method = GET, Path = /dashboard
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:35:20 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:35:20 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:35:20 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:35:24 Europe/Berlin] Parsed path: /addEmployee
+[22-May-2025 06:35:24 Europe/Berlin] Dispatching: Method = POST, Path = /addEmployee
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:35:24 Europe/Berlin] Unhandled exception in addEmployee: SQLSTATE[21S01]: Insert value list does not match column list: 1136 Column count doesn't match value count at row 1
+[22-May-2025 06:35:24 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:35:24 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:35:24 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:38:26 Europe/Berlin] Parsed path: /dashboard
+[22-May-2025 06:38:26 Europe/Berlin] Dispatching: Method = GET, Path = /dashboard
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:38:26 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:38:26 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:38:26 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:38:31 Europe/Berlin] Parsed path: /addEmployee
+[22-May-2025 06:38:31 Europe/Berlin] Dispatching: Method = POST, Path = /addEmployee
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:38:31 Europe/Berlin] PHP Warning:  Undefined property: Controllers\EmployeeController::$employeeRepo in D:\xampp\htdocs\mvc-main\controllers\EmployeeController.php on line 31
+[22-May-2025 06:38:31 Europe/Berlin] addEmployee() error: Call to a member function create() on null
+[22-May-2025 06:38:31 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:38:31 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:38:31 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:40:24 Europe/Berlin] Parsed path: /dashboard
+[22-May-2025 06:40:24 Europe/Berlin] Dispatching: Method = GET, Path = /dashboard
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:40:24 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:40:24 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:40:24 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:40:39 Europe/Berlin] Parsed path: /addEmployee
+[22-May-2025 06:40:39 Europe/Berlin] Dispatching: Method = POST, Path = /addEmployee
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:40:39 Europe/Berlin] PHP Warning:  Undefined property: Controllers\EmployeeController::$employeeRepo in D:\xampp\htdocs\mvc-main\controllers\EmployeeController.php on line 31
+[22-May-2025 06:40:39 Europe/Berlin] addEmployee() error: Call to a member function create() on null
+[22-May-2025 06:40:39 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:40:39 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:40:39 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:41:49 Europe/Berlin] Parsed path: /dashboard
+[22-May-2025 06:41:49 Europe/Berlin] Dispatching: Method = GET, Path = /dashboard
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:41:49 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:41:49 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:41:49 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:42:42 Europe/Berlin] Parsed path: /dashboard
+[22-May-2025 06:42:42 Europe/Berlin] Dispatching: Method = GET, Path = /dashboard
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:42:42 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:42:42 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:42:42 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:42:51 Europe/Berlin] Parsed path: /addEmployee
+[22-May-2025 06:42:51 Europe/Berlin] Dispatching: Method = POST, Path = /addEmployee
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /dashboard
+[22-May-2025 06:42:51 Europe/Berlin] PHP Warning:  Undefined property: Controllers\EmployeeController::$employeeRepo in D:\xampp\htdocs\mvc-main\controllers\EmployeeController.php on line 31
+[22-May-2025 06:42:51 Europe/Berlin] addEmployee() error: Call to a member function create() on null
+[22-May-2025 06:42:51 Europe/Berlin] Parsed path: /getEmployee
+[22-May-2025 06:42:51 Europe/Berlin] Dispatching: Method = GET, Path = /getEmployee
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /Student
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /Student/{id}
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: POST /Student
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: PUT /Student/{id}
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: DELETE /Student/{id}
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: POST /register
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: POST /login
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: POST /addEmployee
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /getEmployee
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /register
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /login
+[22-May-2025 06:42:51 Europe/Berlin] Route defined: GET /dashboard
