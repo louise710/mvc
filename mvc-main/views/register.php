@@ -45,84 +45,55 @@
 <body>
     <h2>Register</h2>
     <form id="registerForm">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
         <button type="submit">Register</button>
     </form>
-    <div id="registerMessage"></div>
+    <div id="message"></div>
 
     <script>
-        document.getElementById("registerForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const messageEl = document.getElementById("registerMessage");
-    
-    // Clear previous messages
-    messageEl.textContent = '';
-    messageEl.className = '';
-            function showMessage(message, type) {
-            const messageEl = document.getElementById("registerMessage");
-            messageEl.textContent = message;
-            messageEl.className = type;
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Client-side validation
+        if (data.password !== data.confirm_password) {
+            document.getElementById('message').innerText = 'Passwords do not match!';
+            document.getElementById('message').style.color = 'red';
+            return;
         }
-    // try {
-        const response = await fetch("/mvc-main/register", {
-            method: "POST",
+
+        // Remove confirm_password before sending to server
+        delete data.confirm_password;
+
+        fetch('/mvc-main/register', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
-        });
-        
-        // First check if response is JSON
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-            const text = await response.text();
-            throw new Error(`Server returned: ${response.status} - ${text}`);
-        }
-        
-        const data = await response.json();
-        
-        if (response.ok) {
-            throw new Error(data.success || 'Registration Successfull');
-        }
-        
-        if (data.token) {
-            // Store token and user data
-            localStorage.setItem("authToken", data.token);
-            if (data.user) {
-                localStorage.setItem("user", JSON.stringify(data.user));
+            body: JSON.stringify(data)
+        })
+        .then(async response => {
+            const result = await response.json();
+            if (response.ok) {
+                document.getElementById('message').innerText = result.message;
+                document.getElementById('message').style.color = 'green';
+                setTimeout(() => {
+                    window.location.href = result.redirect || '/mvc-main/login';
+                }, 1500); // Show message for 1.5 sec before redirect
+            } else {
+                document.getElementById('message').innerText = result.error || 'Registration failed';
+                document.getElementById('message').style.color = 'red';
             }
-            
-            // Show success message
-            showMessage("Registration successful! Redirecting to dashboard...", "success");
-            
-            // Redirect after delay
-            setTimeout(() => {
-                window.location.href = "/mvc-main/dashboard";
-            }, 1500);
-        } else {
-            throw new Error('Registration failed - no token received');
-        }
-    // } catch (error) {
-    //     // Handle different error types
-    //     let errorMsg = error.message;
-        
-    //     // If it's a SyntaxError from JSON parsing
-    //     if (error instanceof SyntaxError) {
-    //         errorMsg = "Server returned invalid response";
-    //     }
-        
-    //     showMessage(errorMsg, "error");
-    //     console.error("Registration error:", error);
-    // }
-});
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('message').innerText = 'An error occurred during registration';
+            document.getElementById('message').style.color = 'red';
+        });
+    }); 
     </script>
 </body>
 </html>

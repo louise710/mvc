@@ -3,7 +3,6 @@ namespace Controllers;
 
 require_once 'vendor/autoload.php';
 
-
 use Request\Request;
 use Responses\Response;
 use Models\UserRepository;
@@ -23,19 +22,43 @@ class UserController extends ApiController {
 
     public function register() {
         $data = $this->request->getBody();
+        
+        if (empty($data['email']) || empty($data['password'])) {
+            return new Response(400, json_encode(['error' => 'All fields are required']));
+        }
+
+        if (isset($data['confirm_password']) && $data['password'] !== $data['confirm_password']) {
+            return new Response(400, json_encode(['error' => 'Passwords do not match']));
+        }
+
+        $existingUser = $this->db->getByEmail($data['email']);
+        if ($existingUser) {
+            return new Response(409, json_encode(['error' => 'Email already registered']));
+        }
+
         $hashed_password = password_hash($data['password'], PASSWORD_BCRYPT);
-    
-        $this->db->create([
-            'ID' => $data['ID'],
+
+        $userId = $this->db->create([
             'email' => $data['email'],
             'password' => $hashed_password
         ]);
-     return new \Responses\Response(200, json_encode(['message' => 'User registered successfully']));
 
+        if (!$userId) {
+            return new Response(500, json_encode(['error' => 'Failed to create user']));
+        }
+
+        return new Response(201, json_encode([
+            'message' => 'Registration successful. Please login.',
+            'redirect' => '/mvc-main/login'
+        ]));
     }
     
     public function login() {
         $data = $this->request->getBody();
+        
+        if (empty($data['email']) || empty($data['password'])) {
+            return new Response(400, json_encode(['error' => 'Email and password are required']));
+        }
         
         $user = $this->db->getByEmail($data['email']); 
     
@@ -56,7 +79,10 @@ class UserController extends ApiController {
     
         $token = JWT::encode($payload, $this->secret_key, 'HS256');
     
-        return new Response(200, json_encode(['token' => $token]));
+        return new Response(200, json_encode([
+            'token' => $token,
+            'redirect' => '/mvc-main/dashboard'  
+        ]));
     }
     
     public function verifyToken($token) {
@@ -66,9 +92,4 @@ class UserController extends ApiController {
             return ["error" => "Invalid or expired token"];
         }
     }
-
-  
 }
-
-
-

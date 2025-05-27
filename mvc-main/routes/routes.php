@@ -56,17 +56,28 @@ function getRoutes($StudentController, $userController,$employeeController) {
             return $userController->login();
         }],
          ['method' => 'POST', 'path' => '/addEmployee', 'handler' => function () use ($employeeController) {
-        return $employeeController->addEmployee();
+            return $employeeController->addEmployee();
         }],
 
-         ['method' => 'GET', 'path' => '/getEmployee', 'handler' => function () use ($employeeController, $userController) {
-            $authCheck = authenticate($userController);
-            if ($authCheck !== true) return $authCheck;
+        ['method' => 'GET', 'path' => '/getEmployee', 'handler' => function () use ($employeeController, $userController) {
+            // $authCheck = authenticate($userController);
+            // if ($authCheck !== true) return $authCheck;
             return $employeeController->getEmployee();
         }],
-
+        ['method' => 'GET', 'path' => '/getEmployee/{id}', 'handler' => function ($id) use ($employeeController, $userController) {
+            // $authCheck = authenticate($userController);
+            // if ($authCheck !== true) return $authCheck;
+            return $employeeController->getEmployeeById($id);
+        }],
+        //for postman testing
+        ['method' => 'GET', 'path' => '/api/employee', 'handler' => function () use ($employeeController, $userController) {
+            return $employeeController->getEmployee();
+        }],
+        ['method' => 'GET', 'path' => '/api/employee/{id}', 'handler' => function ($id) use ($employeeController, $userController) {
+            return $employeeController->getEmployeeById($id);
+        }],
         ['method' => 'POST', 'path' => '/updateEmployee/{id}', 'handler' => function ($id) use ($employeeController) {
-        return $employeeController->updateEmployee($id);
+            return $employeeController->updateEmployee($id);
         }],
 
         ['method' => 'DELETE', 'path' => '/deleteEmployee/{id}', 'handler' => function ($id) use ($employeeController) {
