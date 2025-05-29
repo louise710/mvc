@@ -12,6 +12,7 @@ return array(
     'Models\\' => array($baseDir . '/models'),
     'Middleware\\' => array($baseDir . '/middleware'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
+    'Core\\' => array($baseDir . '/Core'),
     'Controllers\\' => array($baseDir . '/controllers'),
     'Classes\\' => array($baseDir . '/classes'),
 );

@@ -1,186 +1,26 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f6f9;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h2, h3 {
-      color: #333;
-    }
-
-    #message {
-      margin-bottom: 20px;
-      font-weight: bold;
-      color: #0066cc;
-    }
-
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
-    }
-
-    .modal-content {
-      background-color: #fff;
-      margin: 15% auto;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      width: 400px;
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .close {
-      color: #aaa;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close:hover {
-      color: black;
-    }
-
-    #addEmployeeForm input[type="text"],
-    #updateEmployeeForm input[type="text"] {
-      width: 95%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    #addEmployeeBtn, #openAddEmployeeModal, #updateEmployeeBtn {
-      background-color: #28a745;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #addEmployeeBtn:hover, #openAddEmployeeModal:hover, #updateEmployeeBtn:hover {
-      background-color: #218838;
-    }
-
-    #cancelAddEmployee, #cancelUpdateEmployee {
-      background-color: #6c757d;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #cancelAddEmployee:hover, #cancelUpdateEmployee:hover {
-      background-color: #5a6268;
-    }
-
-    #responseMessage, #updateResponseMessage {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      display: center;
-    }
-
-    table thead {
-      background-color: #007bff;
-      color: white;
-    }
-
-    table th, table td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    table tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    .logout-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    
-    #logoutBtn {
-      background-color: #dc3545;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    
-    #logoutBtn:hover {
-      background-color: #c82333;
-    }
-
-    .action-btn {
-      margin-right: 5px;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .update-btn {
-      background-color: #17a2b8;
-      color: white;
-    }
-
-    .update-btn:hover {
-      background-color: #138496;
-    }
-
-    .delete-btn {
-      background-color: #dc3545;
-      color: white;
-    }
-
-    .delete-btn:hover {
-      background-color: #c82333;
-    }
-  </style>
+  <link rel="stylesheet" href="css/view.css">
 </head>
 <body>
+  <?php
+  session_start();
+
+  if (!isset($_SESSION['token'])) {
+      header('Location: /mvc-main/login');
+      exit();
+  }
+  ?>
   <div class="logout-container">
     <h1>Dashboard</h1>
-    <button id="logoutBtn">Logout</button>
+     <a href="/mvc-main/logout" style="text-decoration:none;">
+    <button type="button">Logout</button>
+  </a>
   </div>
   
   <div id="message"></div>
@@ -189,6 +29,21 @@
     <h3>Employee List</h3>
     <button id="openAddEmployeeModal">Add New Employee</button>
   </div>
+  <?php
+  $success = $_SESSION['success'] ?? '';
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['success'], $_SESSION['error']);
+  ?>
+
+<?php if (!empty($error)): ?>
+    <div class="error-alert">
+        <?= htmlspecialchars($error) ?>
+    </div>
+<?php elseif (!empty($success)): ?>
+    <div class="success-alert">
+        <?= htmlspecialchars($success) ?>
+    </div>
+<?php endif; ?>
 
   <table border=".5" id="employeeTable">
     <thead>
@@ -200,17 +55,39 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody></tbody>
-  </table>
+    <tbody>
+  <?php if (!empty($employees)): ?>
+    <?php foreach ($employees as $emp): ?>
+      <tr>
+        <td><?= htmlspecialchars($emp['id']) ?></td>
+        <td><?= htmlspecialchars($emp['first_name']) ?></td>
+        <td><?= htmlspecialchars($emp['last_name']) ?></td>
+        <td><?= htmlspecialchars($emp['office']) ?></td>
+        <td>
+          <button class="update-btn" onclick="openUpdateModal(<?= $emp['id'] ?>, '<?= addslashes($emp['first_name']) ?>', '<?= addslashes($emp['last_name']) ?>', '<?= addslashes($emp['office']) ?>')">Update</button>
+          <form method="POST" action="deleteEmployee" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this employee?');">
+            <input type="hidden" name="id" value="<?= $emp['id'] ?>">
+            <button type="submit" class="delete-btn">Delete</button>
+        </form>
 
-  <!-- Add Employee Modal -->
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  <?php else: ?>
+    <tr>
+      <td colspan="5">No employees found.</td>
+    </tr>
+  <?php endif; ?>
+</tbody>
+  </table>
+  <!-- Add -->
   <div id="addEmployeeModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Add New Employee</h3>
         <span class="close">&times;</span>
       </div>
-      <form id="addEmployeeForm">
+      <form id="addEmployeeForm" method="POST" action="addEmployee">
         <input type="text" name="first_name" placeholder="First Name" required><br>
         <input type="text" name="last_name" placeholder="Last Name" required><br>
         <input type="text" name="office" placeholder="Office" required><br>
@@ -223,17 +100,20 @@
     </div>
   </div>
 
-  <!-- Update Employee Modal -->
+  <!-- Update -->
   <div id="updateEmployeeModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Update Employee</h3>
         <span class="close-update">&times;</span>
       </div>
-      <form id="updateEmployeeForm">
+       <form id="updateEmployeeForm" method="POST" action="updateEmployee">
         <input type="hidden" id="updateEmployeeId" name="id">
+        <label for="fn">First Name:</label>
         <input type="text" id="updateFirstName" name="first_name" placeholder="First Name" required><br>
+        <label for="ln">Last Name:</label>
         <input type="text" id="updateLastName" name="last_name" placeholder="Last Name" required><br>
+        <label for="assigned">Office:</label>
         <input type="text" id="updateOffice" name="office" placeholder="Office" required><br>
         <div class="form-actions">
           <button type="button" id="cancelUpdateEmployee">Cancel</button>
@@ -245,7 +125,6 @@
   </div>
 
   <script>
-    const token = localStorage.getItem('authToken');
     const addModal = document.getElementById('addEmployeeModal');
     const updateModal = document.getElementById('updateEmployeeModal');
     const openModalBtn = document.getElementById('openAddEmployeeModal');
@@ -253,16 +132,6 @@
     const closeUpdateBtn = document.querySelector('.close-update');
     const cancelAddBtn = document.getElementById('cancelAddEmployee');
     const cancelUpdateBtn = document.getElementById('cancelUpdateEmployee');
-
-    if (!token) {
-      document.getElementById('message').innerText = "Not logged in. Redirecting to login...";
-      setTimeout(() => {
-        window.location.href = "/mvc-main/login";
-      }, 1500);
-    } else {
-      loadEmployees();
-    }
-
     // Modal functionality
     openModalBtn.addEventListener('click', () => {
       addModal.style.display = 'block';
@@ -293,112 +162,7 @@
       }
     });
 
-    // Logout functionality
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-      localStorage.removeItem('authToken');
-      window.location.href = "/mvc-main/login";
-    });
-
-    // Add Employee Form
-    document.getElementById('addEmployeeForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {};
-      formData.forEach((value, key) => data[key] = value);
-
-      fetch('/mvc-main/addEmployee', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token
-        },
-        body: JSON.stringify(data)
-      })
-      .then(async res => {
-        const text = await res.text();
-        try {
-          const json = JSON.parse(text);
-          alert(json.message || json.error || "Employee added successfully");
-          e.target.reset();
-          addModal.style.display = 'none';
-          loadEmployees();
-        } catch {
-          console.error("Response is not valid JSON:", text);
-          document.getElementById('responseMessage').innerText = "Unexpected server response.";
-        }
-        if (!res.ok) throw new Error("HTTP status " + res.status);
-      })
-      .catch(err => {
-        console.error(err);
-        document.getElementById('responseMessage').innerText = "Failed to add Employee.";
-      });
-    });
-
-    // Update Employee Form
-    document.getElementById('updateEmployeeForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const data = {};
-      formData.forEach((value, key) => data[key] = value);
-      const id = document.getElementById('updateEmployeeId').value;
-
-      fetch(`/mvc-main/updateEmployee/${id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token
-        },
-        body: JSON.stringify(data)
-      })
-      .then(async res => {
-        const text = await res.text();
-        try {
-          const json = JSON.parse(text);
-          alert(json.message || json.error || "Employee updated successfully");
-          e.target.reset();
-          updateModal.style.display = 'none';
-          loadEmployees();
-        } catch {
-          console.error("Response is not valid JSON:", text);
-          document.getElementById('updateResponseMessage').innerText = "Unexpected server response.";
-        }
-        if (!res.ok) throw new Error("HTTP status " + res.status);
-      })
-      .catch(err => {
-        console.error(err);
-        document.getElementById('updateResponseMessage').innerText = "Failed to update Employee.";
-      });
-    });
-
-    function loadEmployees() {
-      fetch('/mvc-main/getEmployee', {
-        headers: {
-          'Authorization': token
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        const employees = Array.isArray(data) ? data : data.data || [];
-        const tbody = document.querySelector('#employeeTable tbody');
-        tbody.innerHTML = '';
-        employees.forEach(emp => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${emp.id}</td>  
-            <td>${emp.first_name}</td>
-            <td>${emp.last_name}</td>
-            <td>${emp.office}</td>
-            <td>
-              <button class="action-btn update-btn" onclick="openUpdateModal(${emp.id}, '${emp.first_name}', '${emp.last_name}', '${emp.office}')">Update</button>
-              <button class="action-btn delete-btn" onclick="deleteEmployee(${emp.id})">Delete</button>
-            </td>
-          `;
-          tbody.appendChild(row);
-        });
-      });
-    }
-
-    function openUpdateModal(id, firstName, lastName, office) {
+     function openUpdateModal(id, firstName, lastName, office) {
       document.getElementById('updateEmployeeId').value = id;
       document.getElementById('updateFirstName').value = firstName;
       document.getElementById('updateLastName').value = lastName;
@@ -406,21 +170,8 @@
       updateModal.style.display = 'block';
     }
 
-    function deleteEmployee(id) {
-      if (!confirm("Are you sure you want to delete this employee?")) return;
-
-      fetch(`/mvc-main/deleteEmployee/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': token
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        alert(data.message || "Employee deleted.");
-        loadEmployees();
-      });
-    }
   </script>
+
+  
 </body>
 </html>

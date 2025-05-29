@@ -43,10 +43,14 @@ foreach ($routes as $route) {
 
 $response = $router->dispatch();
 
-if ($response instanceof \Responses\Response) {
+if (is_string($response)) {
+    header('Content-Type: text/html; charset=utf-8');
+    echo $response;
+} elseif ($response instanceof \Responses\Response) {
     http_response_code($response->getStatusCode());
     header('Content-Type: application/json');
     echo $response->getBody();
-} elseif (is_string($response)) {
+} else {
+    // fallback, just output
     echo $response;
 }
